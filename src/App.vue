@@ -19,18 +19,54 @@ export default {
       return {
         events: [{
             name: 'ev1',
-            img: 'img1',
-            description: 'desc1'
+            img: '/src/assets/logo.png',
+            imgAlt: 'logo1',
+            description: 'desc1',
+            date: '20.04.2018',
+            city: 'San Francisco, Ca 94102 United States',
+            address: '150 Anza Blvd',
+            venueName: 'Embassy Suites - Burlingame',
+            beginTime: '11:30 AM',
+            endTime: '2:00 PM',
+            company: 'Google',
+            price: '1$',
+            contactPhone: '123456789',
+            mapLongitude: 0,
+            mapLatitude: 0
           },
           {
             name: 'ev2',
-            img: 'img2',
-            description: 'desc2'
+            img: '/src/assets/logo.png',
+            imgAlt: 'logo2',
+            description: 'desc2',
+            date: '20.04.2018',
+            city: 'San Francisco, Ca 94102 United States',
+            address: '150 Anza Blvd',
+            venueName: 'Embassy Suites - Burlingame',
+            beginTime: '11:30 AM',
+            endTime: '2:00 PM',
+            company: 'Google',
+            price: '1$',
+            contactPhone: '123456789',
+            mapLongitude: 0,
+            mapLatitude: 0
           },
           {
             name: 'ev3',
-            img: 'img3',
-            description: 'desc3'
+            img: '/src/assets/logo.png',
+            imgAlt: 'logo3',
+            description: 'desc3',
+            date: '20.04.2018',
+            city: 'San Francisco, Ca 94102 United States',
+            address: '150 Anza Blvd',
+            venueName: 'Embassy Suites - Burlingame',
+            beginTime: '11:30 AM',
+            endTime: '2:00 PM',
+            company: 'Google',
+            price: '1$',
+            contactPhone: '123456789',
+            mapLongitude: 0,
+            mapLatitude: 0
           }
         ]
       }

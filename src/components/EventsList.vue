@@ -2,11 +2,11 @@
     <div>
         <ul class="ev-ul">
             <li v-for="(event, index) in events" :key="event.name">
-                <span class="event">
+                <div class="event">
                     <div class="ev-name">{{ event.name }}</div>
-                    <div class="ev-img">{{ event.img }}</div>
+                    <div class="img-container"><img :src="event.img" class="ev-img" :alt="event.imgAlt"></div>
                     <div class="ev-desc">{{ event.description }}</div>
-                </span>
+                </div>
                 <br>
                 <router-link :to="'/info/'+index" tag="button" class="event-info">Info</router-link>
                 <router-link :to="'/edit/'+index" tag="button">Edit event</router-link>
@@ -18,21 +18,14 @@
 </template>
 <script>
     export default {
-        props: ['events'],
-        data() {
-            return {
-
-            }
-        }
+        props: ['events']
     }
 </script>
 
 <style scoped>
     .event {
         border: 1px solid coral;
-        display: inline-flex;
-        flex-direction: column;
-        width: 200px;
+        width: 400px;
         margin: 20px;
     }
 
@@ -54,13 +47,19 @@
     }
 
     .ev-img {
-        height: 100px
+        height: 300px;
+        width: auto;
     }
 
     .ev-ul {
         list-style-type: none;
         display: flex;
+        flex-grow: 1;
+        justify-content: space-around;
         flex-direction: row;
         flex-wrap: wrap;
+    }
+    .img-container {
+      text-align: center;
     }
 </style>

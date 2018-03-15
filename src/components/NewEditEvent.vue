@@ -1,18 +1,48 @@
 <template>
   <div>
       <div class="new-event">
-        <label for="evName">Event Name:</label>
-        <input type="text" v-model="eventData.name" id="evName">
-        <br>
-        <br>
-        <label for="evImg">Image:</label>
-        <input type="text" v-model="eventData.img" id="evImg">
-        <br>
-        <br>
-        <label for="evDesc">Event Description</label>
-        <input type="text" v-model="eventData.description" id="evDesc">
-        <br>
-        <br>
+        <label for="ev-name">Event Name:</label>
+        <input type="text" v-model="eventData.name" id="ev-name">
+        <br><br>
+        <label for="ev-img">Image:</label>
+        <input type="text" v-model="eventData.img" id="ev-img">
+        <br><br>
+        <label for="ev-imgAlt">Image alt text:</label>
+        <input type="text" v-model="eventData.imgAlt" id="ev-imgAlt">
+        <br><br>
+        <label for="ev-description">Event Description</label>
+        <input type="text" v-model="eventData.description" id="ev-description">
+        <br><br>
+        <label for="ev-city">City:</label>
+        <input type="text" v-model="eventData.city" id="ev-city">
+        <br><br>
+        <label for="ev-address">Address:</label>
+        <input type="text" v-model="eventData.address" id="ev-address">
+        <br><br>
+        <label for="ev-venueName">Venue Name:</label>
+        <input type="text" v-model="eventData.venueName" id="ev-venueName">
+        <br><br>
+        <label for="ev-beginTime">Begin Time:</label>
+        <input type="text" v-model="eventData.beginTime" id="ev-beginTime">
+        <br><br>
+        <label for="ev-endTime">End Time:</label>
+        <input type="text" v-model="eventData.endTime" id="ev-endTime">
+        <br><br>
+        <label for="ev-company">Company:</label>
+        <input type="text" v-model="eventData.company" id="ev-company">
+        <br><br>
+        <label for="ev-price">Price:</label>
+        <input type="text" v-model="eventData.price" id="ev-price">
+        <br><br>
+        <label for="ev-contactPhone">Contact Phone:</label>
+        <input type="text" v-model="eventData.contactPhone" id="ev-contactPhone">
+        <br><br>
+        <label for="ev-mapLongitude">Map Longitude:</label>
+        <input type="text" v-model="eventData.mapLongitude" id="ev-mapLongitude">
+        <br><br>
+        <label for="ev-mapLatitude">Map Latitude:</label>
+        <input type="text" v-model="eventData.mapLatitude" id="ev-mapLatitude">
+        <br><br>
         <span v-if="this.$route.fullPath=='/new'">
          <router-link to="/" tag = "button" @click.native="newEventAdded">Add new event</router-link>
          </span>
@@ -31,7 +61,7 @@
         data() {
             return {
                 eventData: {},
-                id: this.$route.params.id
+                event: this.$route.params.id
             }
         },
         mounted(){
@@ -39,14 +69,23 @@
                 this.eventData = {
                     name: '',
                     img: '',
-                    description: '' }
+                    description: '',
+                    imgAlt: '',
+                    date: '',
+                    city: '',
+                    address: '',
+                    venueName: '',
+                    beginTime: '',
+                    endTime: '',
+                    company: '',
+                    price: '',
+                    contactPhone: '',
+                    mapLongitude: 0,
+                    mapLatitude: 0
+                }
             }
             else {
-                this.eventData = {
-                    name: this.events[this.id].name,
-                    img: this.events[this.id].img,
-                    description: this.events[this.id].description
-                    }
+                this.eventData = this.events[this.event]
             }
         },
         methods: {
@@ -65,9 +104,8 @@
 
 <style scoped>
 .new-event {
-  height: 400px;
   width: 60%;
-  border: 1px solid lightblue;
+  border: 2px solid lightblue;
   margin: 20px auto;
   padding: 20px;
 }
