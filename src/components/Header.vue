@@ -1,6 +1,8 @@
 <template>
   <div>
       <h1>this is header</h1>
+      <router-link to="/signup" tag = "button" @click.native="">Sign up</router-link>
+      <router-link to="/login" tag = "button" @click.native="">Login</router-link>
   </div>
 </template>
 
