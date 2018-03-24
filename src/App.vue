@@ -31,8 +31,8 @@ export default {
             company: 'Google',
             price: '1$',
             contactPhone: '123456789',
-            mapLongitude: 0,
-            mapLatitude: 0
+            mapLatitude: 48.858370,
+            mapLongitude: 2.294486
           },
           {
             name: 'ev2',
@@ -48,8 +48,8 @@ export default {
             company: 'Google',
             price: '1$',
             contactPhone: '123456789',
-            mapLongitude: 0,
-            mapLatitude: 0
+            mapLatitude: 51.501275,
+            mapLongitude: -0.125064
           },
           {
             name: 'ev3',
@@ -65,8 +65,8 @@ export default {
             company: 'Google',
             price: '1$',
             contactPhone: '123456789',
-            mapLongitude: 0,
-            mapLatitude: 0
+            mapLatitude: 51.501275,
+            mapLongitude: -0.125064
           }
         ]
       }
@@ -78,11 +78,28 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
+
 .fade-enter-active, .fade-leave-active {
     transition: all .5s;
 }
 .fade-enter, .fade-leave-to {
     opacity: 0;
+}
+.container {
+  min-height: 400px;
+}
+.signup, .login {
+  width: 400px;
+  margin: 40px auto;
+  padding: 20px;
+  text-align: center;
+}
+.signup input,
+.login input {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
 }
 </style>
