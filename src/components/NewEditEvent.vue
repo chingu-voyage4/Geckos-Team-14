@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
       <div class="new-event">
         <label for="ev-name">Event Name:</label>
         <input type="text" v-model="eventData.name" id="ev-name">
@@ -36,12 +36,16 @@
         <br><br>
         <label for="ev-contactPhone">Contact Phone:</label>
         <input type="text" v-model="eventData.contactPhone" id="ev-contactPhone">
+        <br>
+        <p>Find your Latitude and Longitude <a href="https://www.google.com/maps">Google maps</a></p>
+        <p>Click on map and you'll see coordinates on the bottom of the page</p>
+        <p>Example: Eiffel tower</p> 
+        <p>Latitude: 48.858370, Longitude: 2.294486</p>
+        <label for="ev-mapLatitude">Map Latitude:</label>
+        <input type="text" v-model="eventData.mapLatitude" id="ev-mapLatitude">
         <br><br>
         <label for="ev-mapLongitude">Map Longitude:</label>
         <input type="text" v-model="eventData.mapLongitude" id="ev-mapLongitude">
-        <br><br>
-        <label for="ev-mapLatitude">Map Latitude:</label>
-        <input type="text" v-model="eventData.mapLatitude" id="ev-mapLatitude">
         <br><br>
         <span v-if="this.$route.fullPath=='/new'">
          <router-link to="/" tag = "button" @click.native="newEventAdded">Add new event</router-link>

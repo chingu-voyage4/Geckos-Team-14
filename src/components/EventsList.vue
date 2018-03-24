@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container">
         <ul class="ev-ul">
             <li v-for="(event, index) in events" :key="event.name">
                 <div class="event">
