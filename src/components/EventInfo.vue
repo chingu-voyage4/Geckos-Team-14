@@ -10,7 +10,8 @@
       <h4>Time: {{ event.beginTime }} <span v-if="event.endTime!==''">-</span> {{ event.endTime }}</h4>
       <h4>Company name: {{ event.company }}</h4>
       <h4>Price: {{ event.price }}</h4>
-      <h4>Contact: {{ event.contactPhone }}</h4>
+      <h4>Contact phone: {{ event.contactPhone }}</h4>
+      <h4>Contact email: {{ event.contactEmail }}</h4>
       <h4>map coordinates: {{event.mapLatitude}} {{event.mapLongitude}}</h4>
     <gmap-map
       :center="latlong"

@@ -36,6 +36,9 @@
         <br><br>
         <label for="ev-contactPhone">Contact Phone:</label>
         <input type="text" v-model="eventData.contactPhone" id="ev-contactPhone">
+        <br><br>
+        <label for="ev-contactEmail">Contact Email:</label>
+        <input type="text" v-model="eventData.contactEmail" id="ev-contactEmail">
         <br>
         <p>Find your Latitude and Longitude <a href="https://www.google.com/maps">Google maps</a></p>
         <p>Click on map and you'll see coordinates on the bottom of the page</p>
@@ -84,6 +87,7 @@
                     company: '',
                     price: '',
                     contactPhone: '',
+                    contactEmail: '',
                     mapLongitude: 0,
                     mapLatitude: 0
                 }
@@ -95,12 +99,15 @@
         methods: {
             newEventAdded() {
                 this.events.push(this.eventData)
+                //PUT this.events to database
             },
             eventEdited() {
                 this.events[this.id] = this.eventData
+                //PUT this.events to database
             },
             eventDeleted() {
                 this.events.splice(this.id, 1);
+                //PUT this.events to database
             }
         }
     }

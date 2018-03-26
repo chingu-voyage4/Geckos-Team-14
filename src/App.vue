@@ -1,9 +1,11 @@
 <template>
   <div>
-    <app-header></app-header>
+    <app-header @exit="logOut"
+                :login="login"></app-header>
     <transition name = "fade"
                 mode = "out-in" 
-                appear>
+                appear
+                @login="authorisation" >
         <router-view :events="events"></router-view>
     </transition>
     <app-footer></app-footer>
@@ -17,7 +19,23 @@ import Footer from './components/Footer.vue'
 export default {
   data() {
       return {
-        events: [{
+        events: [],
+        login: 'currentLogin'
+      }
+  },
+  methods: {
+    authorisation(data) {
+      this.login = data
+    },
+    logOut(){
+      this.login = ''
+    }
+  },
+  mounted(){
+    //fetch events data from database, and then
+    //this.events = data
+    //delete lines 36-90
+    this.events = [{
             name: 'ev1',
             img: '/src/assets/logo.png',
             imgAlt: 'logo1',
@@ -31,6 +49,7 @@ export default {
             company: 'Google',
             price: '1$',
             contactPhone: '123456789',
+            contactEmail: 'email@email.com',
             mapLatitude: 48.858370,
             mapLongitude: 2.294486
           },
@@ -48,6 +67,7 @@ export default {
             company: 'Google',
             price: '1$',
             contactPhone: '123456789',
+            contactEmail: 'email@email.com',
             mapLatitude: 51.501275,
             mapLongitude: -0.125064
           },
@@ -65,11 +85,11 @@ export default {
             company: 'Google',
             price: '1$',
             contactPhone: '123456789',
+            contactEmail: 'email@email.com',
             mapLatitude: 51.501275,
             mapLongitude: -0.125064
           }
         ]
-      }
   },
   components: {
     appHeader: Header,
