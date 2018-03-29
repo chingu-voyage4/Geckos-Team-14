@@ -1,0 +1,16 @@
+{
+  "name": "codemeets",
+  "version": "1.0.0",
+  "description": "REST API for Chingu Voyage 4 project - Team: Geckos 14",
+  "main": "app.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "Lulu",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.3",
+    "mongoose": "^5.0.12"
+  }
+}
