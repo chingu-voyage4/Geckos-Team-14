@@ -1,10 +1,10 @@
 <template>
   <div class="navbar">
-      <div class="logo">Our logo</div>
+      <router-link to="/" tag = "a" class="logo">Codemeets</router-link>
       <div class="signup-login">
         <span v-if="login!==''">
           <span>{{login}}</span>
-          <router-link to="/" tag = "button" @click.native="exit">Log out</router-link>
+          <router-link to="/" tag = "button" class="exit-button" @click.native="exit">Log out</router-link>
         </span>
         <span v-else>
         <router-link to="/signup" tag = "button">Sign up</router-link>
@@ -27,14 +27,22 @@
 
 <style scoped>
   .navbar {
-    border: 1px solid green;
     height: 100px;
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
-  .logo, 
   .signup-login {
-    margin: 0 40px;
+    margin: 0 60px;
+  }
+  .logo {
+    color: #463ac9;
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0 60px;
+  }
+  .exit-button {
+    margin-left: 20px;
   }
 </style>

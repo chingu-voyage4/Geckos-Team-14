@@ -8,8 +8,8 @@
       <input type="password" placeholder = "Confirm password" v-model="signupConfirmPassword">
       <br>
       <router-link to="/" tag = "button" @click.native="signup">Signup</router-link>
-      <router-link to="/" tag = "button">Back</router-link>
-      <p>
+      <router-link to="/" tag = "button" class="cancel-button">Back</router-link>
+      <p><br>
         Already have an account?
         <router-link to="/login" tag = "a">Log in</router-link>
       </p>
