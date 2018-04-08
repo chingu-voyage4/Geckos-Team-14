@@ -2,15 +2,21 @@
     <div class="container">
         <ul class="ev-ul">
             <li v-for="(event, index) in events" :key="event.name">
-                <div class="event">
+              <router-link :to="'/info/'+index" tag="a" class="event-link">
+                <div class="event" :style="{backgroundImage: 'url(' + event.img + ')'}">
+                  <div class="event-inner">
                     <div class="ev-name">{{ event.name }}</div>
-                    <div class="img-container"><img :src="event.img" class="ev-img" :alt="event.imgAlt"></div>
-                    <div class="ev-desc">{{ event.description }}</div>
+                    <br>
+                    <div class="event-buttons">
+                      <router-link :to="'/info/'+index" tag="button" class="event-info">Info</router-link>
+                      <router-link :to="'/edit/'+index" tag="button" class="event-edit">Edit event</router-link>
+                    </div>
+                    <br>
+                  </div>
+                    <!--<div class="img-container"><img :src="event.img" class="ev-img" :alt="event.imgAlt"></div>
+                    <div class="ev-desc">{{ event.description }}</div>-->
                 </div>
-                <br>
-                <router-link :to="'/info/'+index" tag="button" class="event-info">Info</router-link>
-                <router-link :to="'/edit/'+index" tag="button">Edit event</router-link>
-                <br>
+              </router-link>
             </li>
         </ul>
         <router-link to="/new" tag="button" class="add-btn">Add New event</router-link>
@@ -24,26 +30,64 @@
 
 <style scoped>
     .event {
-        border: 1px solid coral;
         width: 400px;
+        min-height: 400px;
         margin: 20px;
+        background-size: cover;
+        background-position: center center;
+        overflow: hidden;
+        position: relative;
     }
 
     .event-info {
-        margin-left: 20px;
+      margin-right: 20px;
     }
-
+    .event-link {
+      text-decoration: none;
+    }
     .add-btn {
-        margin: 20px 60px;
+      margin: 10px 60px 30px;
     }
 
-    .event>div {
-        border: 1px solid salmon;
+    .event-inner {
+      position: absolute;
+      top:0;
+      left:0;
+      right:0;
+      bottom: 0;
+      background: rgba(0,0,0,.2);
+      transition: all .5s;
     }
-
-    .ev-name,
-    .ev-desc {
-        height: 50px;
+    .ev-name {
+      position: absolute;
+      bottom: 0;
+      font-size: 40px;
+      color: #fff;
+      padding: 20px 20px 10px;
+      transition: all .5s;
+    }
+    .event-buttons {
+      position: absolute;
+      padding: 20px;
+      bottom: -80px;
+      color: #333;
+      transition: all .5s;
+    }
+    .event-inner:hover {
+      background: rgba(0,0,0,.4)
+    }
+    .event-inner:hover .ev-name {
+      bottom: 70px;
+    }
+    .event-inner:hover .event-buttons {
+      bottom: 0;
+    }
+    li {
+      width: 33.3%;
+    }
+    li a {
+      display: flex;
+      justify-content: center;
     }
 
     .ev-img {
@@ -52,12 +96,14 @@
     }
 
     .ev-ul {
+        position: relative;
         list-style-type: none;
         display: flex;
-        flex-grow: 1;
-        justify-content: space-around;
+        justify-content: flex-start;
         flex-direction: row;
         flex-wrap: wrap;
+        margin: 0 auto;
+        padding: 0;
     }
     .img-container {
       text-align: center;

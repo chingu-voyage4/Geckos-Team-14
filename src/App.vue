@@ -15,6 +15,7 @@
 <script>
 import Header from './components/Header.vue'
 import Footer from './components/Footer.vue'
+import axios from 'axios'
 
 export default {
   data() {
@@ -32,12 +33,20 @@ export default {
     }
   },
   mounted(){
+    /*axios.get(`https://codemeets.herokuapp.com/events`)
+    .then(function (response) {
+    this.events = response;
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });*/
     //fetch events data from database, and then
     //this.events = data
     //delete lines 36-90
     this.events = [{
             name: 'ev1',
-            img: '/src/assets/logo.png',
+            img: '/src/assets/12.jpg',
             imgAlt: 'logo1',
             description: 'desc1',
             date: '20.04.2018',
@@ -99,7 +108,60 @@ export default {
 </script>
 
 <style>
+* {
+  font-family: 'Open Sans', sans-serif;
+  margin: 0;
+  color: #333;
+}
+a {
+  text-decoration: none;
+  color: #463ac9;
+}
+a:hover {
+  text-decoration: underline;
+}
+button {
+    background-color: #463ac9;
+    border-radius: 3px;
+    color: #fff;
+    font-weight: 600;
+    padding: 10px 20px;
+    border: 2px solid #463ac9;
+    font-size: 16px;
+    transition: all 2s;
+    display: inline-flex;
+    align-items: center;
+    transition: all .3s;
+    cursor: pointer;
+    margin-right: 10px;
+    outline: none;
+}
+button:last-child {
+  margin-right: 0;
+}
+button:hover {
+  background-color: #2c21a1;
+}
 
+.event-buttons button {
+  border: 2px solid #fff;
+  color: white;
+  background-color: transparent;
+}
+.event-buttons button:hover {
+  background-color: white;
+  color: #463ac9;
+}
+.cancel-button {
+  background-color: white;
+  border: 2px solid #463ac9;
+  color: #463ac9;
+}
+.cancel-button:hover{
+  background-color: #f1f0f7;
+  border: 2px solid #463ac9;
+  color: #463ac9;
+}
 .fade-enter-active, .fade-leave-active {
     transition: all .5s;
 }
@@ -111,15 +173,16 @@ export default {
 }
 .signup, .login {
   width: 400px;
-  margin: 40px auto;
-  padding: 20px;
+  margin: 0 auto;
+  padding: 60px;
   text-align: center;
 }
-.signup input,
-.login input {
+
+input {
   width: 100%;
   padding: 5px;
   margin-bottom: 20px;
-  border: 1px solid #ddd;
+  font-size: 14px;
+  border: 1px solid #463ac9;
 }
 </style>

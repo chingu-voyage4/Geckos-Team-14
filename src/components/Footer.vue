@@ -1,6 +1,6 @@
 <template>
   <div>
-      <p>copyright</p>
+      <p><a href="https://github.com/chingu-voyage4/Geckos-Team-14">© Geckos-team-14.</a> 2018</p>
   </div>
 </template>
 
@@ -12,10 +12,16 @@ export default {
 
 <style scoped>
   div {
-      border: 1px solid lightgreen;
+    background-color: #001766;
+    padding: 40px;
+    margin: 0;
   }
   p {
-      text-align: center;
+    text-align: right;
+    color: #7a88ff;
+  }
+  a {
+    color: #7a88ff;
   }
 </style>
 

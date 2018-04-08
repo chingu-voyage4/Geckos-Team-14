@@ -6,7 +6,8 @@
       <input type="text" placeholder = "Password" v-model = "loginPassword">
       <br>
       <router-link to="/" tag = "button" @click.native="login">Login</router-link>
-      <router-link to="/" tag = "button">Back</router-link>
+      <router-link to="/" tag = "button" class="cancel-button">Back</router-link>
+      <br><br>
       <p>
         <router-link to="/reset-password" tag = "a">Forgot your username or password?</router-link>
       </p>

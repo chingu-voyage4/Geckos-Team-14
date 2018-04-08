@@ -1,6 +1,8 @@
 <template>
   <div class="container">
       <div class="new-event">
+        <h1 v-if="this.$route.fullPath=='/new'">New Event</h1>
+        <h1 v-else >Edit Event</h1>
         <label for="ev-name">Event Name:</label>
         <input type="text" v-model="eventData.name" id="ev-name">
         <br><br>
@@ -39,11 +41,12 @@
         <br><br>
         <label for="ev-contactEmail">Contact Email:</label>
         <input type="text" v-model="eventData.contactEmail" id="ev-contactEmail">
-        <br>
+        <br><br>
         <p>Find your Latitude and Longitude <a href="https://www.google.com/maps">Google maps</a></p>
         <p>Click on map and you'll see coordinates on the bottom of the page</p>
         <p>Example: Eiffel tower</p> 
         <p>Latitude: 48.858370, Longitude: 2.294486</p>
+        <br>
         <label for="ev-mapLatitude">Map Latitude:</label>
         <input type="text" v-model="eventData.mapLatitude" id="ev-mapLatitude">
         <br><br>
@@ -57,18 +60,20 @@
             <router-link to="/" tag = "button" @click.native="eventEdited">Edit event</router-link>
             <router-link to="/" tag = "button" @click.native="eventDeleted">Delete event</router-link>
         </span>
-        <router-link to="/" tag = "button" >Cancel</router-link>
+        <router-link to="/" tag = "button" class="cancel-button">Cancel</router-link>
       </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
+
     export default {
         props: ['events'],
         data() {
             return {
                 eventData: {},
-                event: this.$route.params.id
+                id: this.$route.params.id
             }
         },
         mounted(){
@@ -93,12 +98,13 @@
                 }
             }
             else {
-                this.eventData = this.events[this.event]
+                this.eventData = this.events[this.id]
             }
         },
         methods: {
             newEventAdded() {
-                this.events.push(this.eventData)
+                this.events.push(this.eventData);
+                /*axios.post('https://codemeets.herokuapp.com/events', this.eventData)*/
                 //PUT this.events to database
             },
             eventEdited() {
@@ -114,10 +120,27 @@
 </script>
 
 <style scoped>
+h1 {
+  color: #333;
+  margin-bottom: 30px;
+}
 .new-event {
-  width: 60%;
-  border: 2px solid lightblue;
+  width: 820px;
   margin: 20px auto;
   padding: 20px;
+}
+label{
+  display: inline-block;
+  width: 200px;
+}
+input {
+  width: 600px;
+  margin-bottom: 0;
+}
+button {
+  margin-top: 30px;
+}
+.cancel-button {
+  margin-left: 10px;
 }
 </style>
