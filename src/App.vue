@@ -33,18 +33,17 @@ export default {
     }
   },
   mounted(){
-    /*axios.get(`https://codemeets.herokuapp.com/events`)
-    .then(function (response) {
-    this.events = response;
-    console.log(response);
-  })
-  .catch(function (error) {
-    console.log(error);
-  });*/
+    axios.get(`https://codemeets.herokuapp.com/events`)
+    .then(response => {
+      this.events = response.data;
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
     //fetch events data from database, and then
     //this.events = data
     //delete lines 36-90
-    this.events = [{
+    /*this.events = [{
             name: 'ev1',
             img: '/src/assets/12.jpg',
             imgAlt: 'logo1',
@@ -98,7 +97,7 @@ export default {
             mapLatitude: 51.501275,
             mapLongitude: -0.125064
           }
-        ]
+        ]*/
   },
   components: {
     appHeader: Header,
@@ -169,7 +168,7 @@ button:hover {
     opacity: 0;
 }
 .container {
-  min-height: 400px;
+  min-height: calc(100vh - 202px);
 }
 .signup, .login {
   width: 400px;

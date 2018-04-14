@@ -7,7 +7,7 @@ import ResetPassword from './components/ResetPassword.vue'
 
 export const routes = [
     {path: '/', component: EventsList},
-    {path: '/signup', component: Signup},
+    {path: '/register', component: Signup},
     {path: '/login', component: Login},
     {path: '/reset-password', component: ResetPassword},
     {path: '/new', component: NewEditEvent},

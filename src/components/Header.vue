@@ -4,10 +4,10 @@
       <div class="signup-login">
         <span v-if="login!==''">
           <span>{{login}}</span>
-          <router-link to="/" tag = "button" class="exit-button" @click.native="exit">Log out</router-link>
+          <a href="/logout"><router-link to="/" tag = "button" class="exit-button" @click.native="exit">Log out</router-link></a>
         </span>
         <span v-else>
-        <router-link to="/signup" tag = "button">Sign up</router-link>
+        <router-link to="/register" tag = "button">Sign up</router-link>
         <router-link to="/login" tag = "button">Login</router-link>
         </span>
       </div>

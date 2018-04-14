@@ -13,7 +13,7 @@
       </p>
       <p>
         Don't have an account?
-        <router-link to="/signup" tag = "a" @click.native="login">Sign up</router-link>
+        <router-link to="/register" tag = "a" @click.native="login">Sign up</router-link>
       </p>
     </div>
   </div>
