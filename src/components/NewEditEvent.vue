@@ -4,22 +4,28 @@
         <h1 v-if="this.$route.fullPath=='/new'">New Event</h1>
         <h1 v-else >Edit Event</h1>
         <label for="ev-name">Event Name:</label>
-        <input type="text" v-model="eventData.name" id="ev-name">
+        <input type="text" v-model="eventData.eventName" id="ev-name">
         <br><br>
         <label for="ev-img">Image:</label>
-        <input type="text" v-model="eventData.img" id="ev-img">
+        <input type="text" v-model="eventData.imageLink" id="ev-img">
         <br><br>
-        <label for="ev-imgAlt">Image alt text:</label>
+        <!--<label for="ev-imgAlt">Image alt text:</label>
         <input type="text" v-model="eventData.imgAlt" id="ev-imgAlt">
-        <br><br>
-        <label for="ev-description">Event Description</label>
+        <br><br>-->
+        <label for="ev-description">Event Description:</label>
         <input type="text" v-model="eventData.description" id="ev-description">
+        <br><br>
+        <label for="ev-country">Country:</label>
+        <input type="text" v-model="eventData.country" id="ev-country">
         <br><br>
         <label for="ev-city">City:</label>
         <input type="text" v-model="eventData.city" id="ev-city">
         <br><br>
         <label for="ev-address">Address:</label>
         <input type="text" v-model="eventData.address" id="ev-address">
+        <br><br>
+        <label for="ev-date">Date:</label>
+        <input type="text" v-model="eventData.date" id="ev-date">
         <br><br>
         <label for="ev-venueName">Venue Name:</label>
         <input type="text" v-model="eventData.venueName" id="ev-venueName">
@@ -30,7 +36,7 @@
         <label for="ev-endTime">End Time:</label>
         <input type="text" v-model="eventData.endTime" id="ev-endTime">
         <br><br>
-        <label for="ev-company">Company:</label>
+        <!--<label for="ev-company">Company:</label>
         <input type="text" v-model="eventData.company" id="ev-company">
         <br><br>
         <label for="ev-price">Price:</label>
@@ -38,6 +44,9 @@
         <br><br>
         <label for="ev-contactPhone">Contact Phone:</label>
         <input type="text" v-model="eventData.contactPhone" id="ev-contactPhone">
+        <br><br>-->
+        <label for="ev-contactName">Contact Name:</label>
+        <input type="text" v-model="eventData.contactName" id="ev-contactName">
         <br><br>
         <label for="ev-contactEmail">Contact Email:</label>
         <input type="text" v-model="eventData.contactEmail" id="ev-contactEmail">
@@ -54,11 +63,14 @@
         <input type="text" v-model="eventData.mapLongitude" id="ev-mapLongitude">
         <br><br>
         <span v-if="this.$route.fullPath=='/new'">
-         <router-link to="/" tag = "button" @click.native="newEventAdded">Add new event</router-link>
+         <!--<router-link to="/" tag = "button" @click.native="newEventAdded">Add new event</router-link>-->
+         <button @click="newEventAdded">Add new event</button>
          </span>
         <span v-else>
-            <router-link to="/" tag = "button" @click.native="eventEdited">Edit event</router-link>
-            <router-link to="/" tag = "button" @click.native="eventDeleted">Delete event</router-link>
+          <button @click="eventEdited">Edit event</button>
+          <button @click="eventDeleted">Delete event</button>
+            <!--<router-link to="/" tag = "button" @click.native="eventEdited">Edit event</router-link>
+            <router-link to="/" tag = "button" @click.native="eventDeleted">Delete event</router-link>-->
         </span>
         <router-link to="/" tag = "button" class="cancel-button">Cancel</router-link>
       </div>
@@ -69,7 +81,7 @@
 import axios from 'axios'
 
     export default {
-        props: ['events'],
+        props: ['events','login'],
         data() {
             return {
                 eventData: {},
@@ -79,22 +91,25 @@ import axios from 'axios'
         mounted(){
             if (this.$route.fullPath=='/new'){
                 this.eventData = {
-                    name: '',
-                    img: '',
+                    eventName: '',
+                    imageLink: '',
                     description: '',
-                    imgAlt: '',
                     date: '',
+                    country: '',
                     city: '',
                     address: '',
                     venueName: '',
                     beginTime: '',
                     endTime: '',
-                    company: '',
+                    /*company: '',
                     price: '',
-                    contactPhone: '',
+                    contactPhone: '',*/
+                    contactName: '',
                     contactEmail: '',
                     mapLongitude: 0,
-                    mapLatitude: 0
+                    mapLatitude: 0,
+                    eventOwner: this.login.id,//"unknown",//this.login.id,
+                    user: this.login.id//"unknown"
                 }
             }
             else {
@@ -103,17 +118,56 @@ import axios from 'axios'
         },
         methods: {
             newEventAdded() {
-                this.events.push(this.eventData);
+                //console.log(this.login.id, this.eventData);
+                //this.eventData.user = this.login.id;
+                this.eventData.user = "unknown";//this.login.email;
+                axios.post(`https://codemeets.herokuapp.com/events`, this.eventData)
+                .then(response => {
+                  console.log(response);
+                  this.events.push(this.eventData);
+                })
+                .then(()=>{
+                  this.$emit('render');
+                  this.$router.push('/')
+                })
+                .catch(function (error) {
+                  console.log(error);
+                });
                 /*axios.post('https://codemeets.herokuapp.com/events', this.eventData)*/
                 //PUT this.events to database
             },
             eventEdited() {
-                this.events[this.id] = this.eventData
-                //PUT this.events to database
+                //this.events[this.id] = this.eventData;
+                this.eventData.user = "unknown";
+                axios.get(`https://codemeets.herokuapp.com/events`)
+                .then(response => {
+                  console.log(response)
+                })
+                axios.put(`https://codemeets.herokuapp.com/events/`+this.events[this.id]._id,this.eventData)
+                .then(response => {
+                  console.log(response)
+                })
+                .then(()=>{
+                  this.$emit('render');
+                  this.$router.push('/')
+                })
+                .catch(function (error) {
+                  console.log(error);
+                });
             },
             eventDeleted() {
-                this.events.splice(this.id, 1);
-                //PUT this.events to database
+                //this.events.splice(this.id, 1);
+                axios.delete(`https://codemeets.herokuapp.com/events/`+this.events[this.id]._id)
+                .then(response => {
+                  console.log(response)
+                })
+                .then(()=>{
+                  this.$emit('render');
+                  this.$router.push('/')
+                })
+                .catch(function (error) {
+                  console.log(error);
+                });
             }
         }
     }

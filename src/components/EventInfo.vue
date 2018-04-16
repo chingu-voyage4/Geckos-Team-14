@@ -1,6 +1,6 @@
 <template>
   <div class="event-info">
-      <h1>Event: {{ event.name }}</h1>
+      <h1>Event: {{ event.eventName }}</h1>
       <div class="img-container"><img :src="event.img" class="ev-img" :alt="event.imgAlt"></div>
       <div class="info">
         <div class="row"><span class="left-block">Description:</span><span class="right-block">{{ event.description }}</span><br></div>
@@ -9,9 +9,9 @@
         <div class="row"><span class="left-block">Address:</span><span class="right-block">{{ event.address }}</span><br></div>
         <div class="row"><span class="left-block">Venue name:</span><span class="right-block">{{ event.venueName }}</span><br></div>
         <div class="row"><span class="left-block">Time:</span><span class="right-block">{{ event.beginTime }} <span v-if="event.endTime!==''">- </span>{{ event.endTime }}</span><br></div>
-        <div class="row"><span class="left-block">Company name:</span><span class="right-block">{{ event.company }}</span><br></div>
+        <!--<div class="row"><span class="left-block">Company name:</span><span class="right-block">{{ event.company }}</span><br></div>
         <div class="row"><span class="left-block">Price:</span><span class="right-block">{{ event.price }}</span><br></div>
-        <div class="row"><span class="left-block">Contact phone:</span><span class="right-block">{{ event.contactPhone }}</span><br></div>
+        <div class="row"><span class="left-block">Contact phone:</span><span class="right-block">{{ event.contactPhone }}</span><br></div>-->
         <div class="row"><span class="left-block">Contact email:</span><span class="right-block">{{ event.contactEmail }}</span><br></div>
         <div class="row"><span class="left-block">Map coordinates:</span><span class="right-block">lat: {{event.mapLatitude}}, lon: {{event.mapLongitude}}</span><br></div>
       </div>

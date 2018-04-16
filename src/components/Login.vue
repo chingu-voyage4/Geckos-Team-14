@@ -3,9 +3,9 @@
     <div class="login">
       <input type="text" placeholder = "Email" v-model = "loginEmail">
       <br>
-      <input type="text" placeholder = "Password" v-model = "loginPassword">
+      <input type="password" placeholder = "Password" v-model = "loginPassword">
       <br>
-      <router-link to="/" tag = "button" @click.native="login">Login</router-link>
+      <button @click="login">Login</button>
       <router-link to="/" tag = "button" class="cancel-button">Back</router-link>
       <br><br>
       <p>
@@ -13,13 +13,15 @@
       </p>
       <p>
         Don't have an account?
-        <router-link to="/register" tag = "a" @click.native="login">Sign up</router-link>
+        <router-link to="/register" tag = "a">Sign up</router-link>
       </p>
     </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
+
   export default {
     data(){
       return {
@@ -29,11 +31,23 @@
     },
     methods: {
       login() {
-        //check database for that login
-        //and then login
-        //data in this.loginEmail, this.loginPassword
-        //if (success) this.$emit('login', this.loginEmail)
+          axios.post(`https://codemeets.herokuapp.com/login`, 
+          {
+            email: this.loginEmail,
+            password: this.loginPassword
+          })
+          .then(response => {
+            console.log(response);
+            console.log(response.data, this.loginEmail)
+            this.$emit('login', {id: response.data, email: this.loginEmail});
+          })
+          .then(()=>{
+            this.$router.push('/')
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+        }
       }
-    }
   }
 </script>

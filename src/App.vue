@@ -4,9 +4,12 @@
                 :login="login"></app-header>
     <transition name = "fade"
                 mode = "out-in" 
-                appear
-                @login="authorisation" >
-        <router-view :events="events"></router-view>
+                appear>
+        <router-view  :events="events"
+                      :login="login"
+                      @login="authorisation"
+                      @register="authorisation" 
+                      @render="renderEvents"></router-view>
     </transition>
     <app-footer></app-footer>
   </div>
@@ -21,7 +24,7 @@ export default {
   data() {
       return {
         events: [],
-        login: 'currentLogin'
+        login: ''
       }
   },
   methods: {
@@ -30,16 +33,19 @@ export default {
     },
     logOut(){
       this.login = ''
+    },
+    renderEvents(){
+      axios.get(`https://codemeets.herokuapp.com/events`)
+      .then(response => {
+        this.events = response.data;
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
     }
   },
   mounted(){
-    axios.get(`https://codemeets.herokuapp.com/events`)
-    .then(response => {
-      this.events = response.data;
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+    this.renderEvents();
     //fetch events data from database, and then
     //this.events = data
     //delete lines 36-90

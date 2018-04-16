@@ -3,8 +3,8 @@
       <router-link to="/" tag = "a" class="logo">Codemeets</router-link>
       <div class="signup-login">
         <span v-if="login!==''">
-          <span>{{login}}</span>
-          <a href="/logout"><router-link to="/" tag = "button" class="exit-button" @click.native="exit">Log out</router-link></a>
+          <span>{{login.email}}</span>
+          <button class="exit-button" @click="exit">Log out</button>
         </span>
         <span v-else>
         <router-link to="/register" tag = "button">Sign up</router-link>
@@ -15,11 +15,22 @@
 </template>
 
 <script>
+import axios from 'axios'
+
     export default {
       props: ['login'],
       methods: {
         exit() {
-          this.$emit('exit');
+          axios.get(`https://codemeets.herokuapp.com/logout`)
+          .then(response => {
+            this.$emit('exit');
+          })
+          .then(()=>{
+            this.$router.push('/')
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
         }
       }
     }

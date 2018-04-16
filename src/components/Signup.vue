@@ -7,7 +7,8 @@
       <br>
       <input type="password" placeholder = "Confirm password" v-model="signupConfirmPassword">
       <br>
-      <router-link to="/" tag = "button" @click.native="signup">Signup</router-link>
+      <!--<router-link to="/" tag = "button" @click.native="signup">Signup</router-link>-->
+      <button @click="signup">Signup</button>
       <router-link to="/" tag = "button" class="cancel-button">Back</router-link>
       <p><br>
         Already have an account?
@@ -18,6 +19,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
   export default {
     data() {
       return {
@@ -28,15 +31,26 @@
     },
     methods: {
       signup() {
-        //check password and show message if something wrong. i will add that functionality later
-        if (this.signupPassword.length < 5 || this.signupPassword!==this.signupConfirmPassword) {
+        if (this.signupPassword.length < 2 || this.signupPassword!==this.signupConfirmPassword) {
           console.log('weak password or confirm correctly')
         }
         else {
-          //check if there's already an account with that email
-          //add new user to database, i think POST
-          //send email about signup
-          //data in this.signupEmail and this.signupPassword
+          axios.post(`https://codemeets.herokuapp.com/register`, 
+          {
+            email: this.signupEmail,
+            password: this.signupPassword,
+            confirmPassword: this.signupConfirmPassword
+          })
+          .then(response => {
+            console.log(response);
+            this.$emit('register', {id: response.data, email: this.signupEmail});
+          })
+          .then(()=>{
+            this.$router.push('/')
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
         }
       }
     }

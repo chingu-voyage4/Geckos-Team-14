@@ -1,11 +1,11 @@
 <template>
     <div class="container">
         <ul class="ev-ul">
-            <li v-for="(event, index) in events" :key="event.name">
+            <li v-for="(event, index) in events" :key="event.eventName">
               <router-link :to="'/info/'+index" tag="a" class="event-link">
                 <div class="event" :style="{backgroundImage: 'url(' + event.img + ')'}">
                   <div class="event-inner">
-                    <div class="ev-name">{{ event.name }}</div>
+                    <div class="ev-name">{{ event.eventName }}</div>
                     <br>
                     <div class="event-buttons">
                       <router-link :to="'/info/'+index" tag="button" class="event-info">Info</router-link>
@@ -13,8 +13,6 @@
                     </div>
                     <br>
                   </div>
-                    <!--<div class="img-container"><img :src="event.img" class="ev-img" :alt="event.imgAlt"></div>
-                    <div class="ev-desc">{{ event.description }}</div>-->
                 </div>
               </router-link>
             </li>
