@@ -1,7 +1,7 @@
 <template>
   <div class="event-info">
       <h1>Event: {{ event.eventName }}</h1>
-      <div class="img-container"><img :src="event.img" class="ev-img" :alt="event.imgAlt"></div>
+      <div class="img-container"><img :src="event.imageLink" class="ev-img" :alt="event.imgAlt"></div>
       <div class="info">
         <div class="row"><span class="left-block">Description:</span><span class="right-block">{{ event.description }}</span><br></div>
         <div class="row"><span class="left-block">Date:</span><span class="right-block">{{ event.date }}</span><br></div>

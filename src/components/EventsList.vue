@@ -3,13 +3,14 @@
         <ul class="ev-ul">
             <li v-for="(event, index) in events" :key="event.eventName">
               <router-link :to="'/info/'+index" tag="a" class="event-link">
-                <div class="event" :style="{backgroundImage: 'url(' + event.img + ')'}">
+                <div class="event" :style="{backgroundImage: 'url(' + event.imageLink + ')'}">
                   <div class="event-inner">
                     <div class="ev-name">{{ event.eventName }}</div>
                     <br>
                     <div class="event-buttons">
                       <router-link :to="'/info/'+index" tag="button" class="event-info">Info</router-link>
-                      <router-link :to="'/edit/'+index" tag="button" class="event-edit">Edit event</router-link>
+                      <router-link :to="'/edit/'+index" tag="button" class="event-edit"
+                                    v-if="login.id==events[index].eventOwner">Edit event</router-link>
                     </div>
                     <br>
                   </div>
@@ -22,7 +23,7 @@
 </template>
 <script>
     export default {
-        props: ['events']
+        props: ['events','login']
     }
 </script>
 
@@ -63,6 +64,8 @@
       color: #fff;
       padding: 20px 20px 10px;
       transition: all .5s;
+      width: 360px;
+      word-wrap: break-word;
     }
     .event-buttons {
       position: absolute;

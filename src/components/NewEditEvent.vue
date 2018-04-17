@@ -6,7 +6,7 @@
         <label for="ev-name">Event Name:</label>
         <input type="text" v-model="eventData.eventName" id="ev-name">
         <br><br>
-        <label for="ev-img">Image:</label>
+        <label for="ev-img">Image link:</label>
         <input type="text" v-model="eventData.imageLink" id="ev-img">
         <br><br>
         <!--<label for="ev-imgAlt">Image alt text:</label>
@@ -108,8 +108,9 @@ import axios from 'axios'
                     contactEmail: '',
                     mapLongitude: 0,
                     mapLatitude: 0,
-                    eventOwner: this.login.id,//"unknown",//this.login.id,
-                    user: this.login.id//"unknown"
+                    //eventOwner: this.login.id,//"unknown",//this.login.id,
+                    //user: this.login.id,
+                    userId: this.login.id//"unknown"
                 }
             }
             else {
@@ -120,11 +121,12 @@ import axios from 'axios'
             newEventAdded() {
                 //console.log(this.login.id, this.eventData);
                 //this.eventData.user = this.login.id;
-                this.eventData.user = "unknown";//this.login.email;
+                console.log(this.eventData);
                 axios.post(`https://codemeets.herokuapp.com/events`, this.eventData)
                 .then(response => {
                   console.log(response);
-                  this.events.push(this.eventData);
+                  this.eventData = response;
+                  //this.events.push(this.eventData);
                 })
                 .then(()=>{
                   this.$emit('render');
@@ -138,7 +140,9 @@ import axios from 'axios'
             },
             eventEdited() {
                 //this.events[this.id] = this.eventData;
-                this.eventData.user = "unknown";
+                this.eventData.userId = this.login.id;
+                console.log(this.events[this.id]);
+                console.log('here',this.events[this.id]._id)
                 axios.get(`https://codemeets.herokuapp.com/events`)
                 .then(response => {
                   console.log(response)
@@ -157,7 +161,15 @@ import axios from 'axios'
             },
             eventDeleted() {
                 //this.events.splice(this.id, 1);
-                axios.delete(`https://codemeets.herokuapp.com/events/`+this.events[this.id]._id)
+                console.log(this.login.id);
+                /*axios.delete(`https://codemeets.herokuapp.com/events/vanishall`)
+                .then(response => {
+                  console.log(response)
+                })
+                .catch(function (error) {
+                  console.log(error);
+                })*/
+                axios.delete(`https://codemeets.herokuapp.com/events/`+this.events[this.id]._id, {data: {userId: this.login.id}})
                 .then(response => {
                   console.log(response)
                 })
