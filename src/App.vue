@@ -1,15 +1,21 @@
 <template>
   <div>
     <app-header @exit="logOut"
-                :login="login"></app-header>
+                @searchChange="searchChange"
+                :login="login"
+                :showSearch="showSearch"></app-header>
     <transition name = "fade"
                 mode = "out-in" 
                 appear>
         <router-view  :events="events"
                       :login="login"
+                      :search="search"
                       @login="authorisation"
                       @register="authorisation" 
-                      @render="renderEvents"></router-view>
+                      @render="renderEvents"
+                      @showSearch="searchVisibility"
+                      @emailChanged="emailChange"
+                      @exit="logOut"></router-view>
     </transition>
     <app-footer></app-footer>
   </div>
@@ -24,11 +30,14 @@ export default {
   data() {
       return {
         events: [],
-        login: ''
+        login: '',
+        search: '',
+        showSearch: ''
       }
   },
   methods: {
     authorisation(data) {
+      console.log(data);
       this.login = data
     },
     logOut(){
@@ -38,10 +47,21 @@ export default {
       axios.get(`https://codemeets.herokuapp.com/events`)
       .then(response => {
         this.events = response.data;
+
       })
       .catch(function (error) {
         console.log(error);
       });
+    },
+    searchChange(data){
+      console.log(data);
+      this.search = data;
+    },
+    searchVisibility(data){
+      this.showSearch = data;
+    },
+    emailChange(data){
+      this.login.email = data;
     }
   },
   mounted(){
@@ -147,7 +167,13 @@ button:last-child {
 button:hover {
   background-color: #2c21a1;
 }
-
+button:disabled {
+  opacity: .7;
+  cursor: default;
+}
+button:disabled:hover{
+  background-color: #463ac9;
+}
 .event-buttons button {
   border: 2px solid #fff;
   color: white;
@@ -174,9 +200,9 @@ button:hover {
     opacity: 0;
 }
 .container {
-  min-height: calc(100vh - 202px);
+  min-height: calc(100vh - 232px);
 }
-.signup, .login {
+.signup, .login, .reset-profile {
   width: 400px;
   margin: 0 auto;
   padding: 60px;
@@ -189,5 +215,8 @@ input {
   margin-bottom: 20px;
   font-size: 14px;
   border: 1px solid #463ac9;
+}
+.fill {
+  text-decoration: underline;
 }
 </style>

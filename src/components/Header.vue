@@ -1,9 +1,16 @@
 <template>
   <div class="navbar">
       <router-link to="/" tag = "a" class="logo">Codemeets</router-link>
+      <input type="text" class="search" 
+      v-model = "search" 
+      v-show = "showSearch"
+      @input="searchChanged" 
+      placeholder="Search event...">
       <div class="signup-login">
         <span v-if="login!==''">
           <span>{{login.email}}</span>
+          <router-link to="/profile" tag = "button" class="profile-button">Profile</router-link>
+          <!--<router-link to="/" tag = "button" class="exit-button" @click="exit">Log out</router-link>-->
           <button class="exit-button" @click="exit">Log out</button>
         </span>
         <span v-else>
@@ -18,10 +25,22 @@
 import axios from 'axios'
 
     export default {
-      props: ['login'],
+      props: ['login','showSearch'],
+      data() {
+        return {
+          search: ''
+        }
+      },
       methods: {
+        searchChanged(){
+          console.log('ss', this.search);
+          this.$emit('searchChange', this.search)
+        },
         exit() {
-          axios.get(`https://codemeets.herokuapp.com/logout`)
+          sessionStorage.clear();
+          this.$emit('exit');
+          this.$router.push('/');
+          /*axios.get(`https://codemeets.herokuapp.com/logout`)
           .then(response => {
             this.$emit('exit');
           })
@@ -30,7 +49,7 @@ import axios from 'axios'
           })
           .catch(function (error) {
             console.log(error);
-          });
+          });*/
         }
       }
     }
@@ -53,7 +72,20 @@ import axios from 'axios'
     font-weight: 600;
     margin: 0 60px;
   }
-  .exit-button {
-    margin-left: 20px;
+  .profile-button {
+    margin-left: 10px;
+  }
+  .search {
+    width: 300px;
+    margin-bottom: 0;
+    outline: none;
+    border-width: 2px;
+    border-radius: 3px;
+  }
+  .search:hover {
+    box-shadow: 0 0 8px 0px rgba(70, 58, 201,.5)
+  }
+  .search:focus {
+    box-shadow: 0 0 8px 2px rgba(70, 58, 201,.5)
   }
 </style>

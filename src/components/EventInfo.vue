@@ -1,5 +1,5 @@
 <template>
-  <div class="event-info">
+  <div class="event-info container">
       <h1>Event: {{ event.eventName }}</h1>
       <div class="img-container"><img :src="event.imageLink" class="ev-img" :alt="event.imgAlt"></div>
       <div class="info">
@@ -15,31 +15,34 @@
         <div class="row"><span class="left-block">Contact email:</span><span class="right-block">{{ event.contactEmail }}</span><br></div>
         <div class="row"><span class="left-block">Map coordinates:</span><span class="right-block">lat: {{event.mapLatitude}}, lon: {{event.mapLongitude}}</span><br></div>
       </div>
-    <gmap-map
-      :center="latlong"
-      :zoom="15"
-      :markers = "markers"
-      map-type-id="roadmap"
-      style="width: 100%; height: 400px"
-    >
-    <GmapMarker v-for="(marker, index) in markers"
-        :key="index"
-        :position="marker.position"
-        />
-      </gmap-map>
-     
+      <div v-show="+event.mapLatitude&&+event.mapLongitude">
+        <gmap-map
+          :center="latlong"
+          :zoom="15"
+          :markers = "markers"
+          map-type-id="roadmap"
+          style="width: 100%; height: 400px"
+        >
+        <GmapMarker v-for="(marker, index) in markers"
+          :key="index"
+          :position="marker.position"
+          />
+        </gmap-map>
+     </div>
       <router-link to="/" tag = "button" class="cancel-button">Back</router-link>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
 
     export default {
         props: ['events'],
         data(){
           return {  
             place: null,
-            event: this.events[this.$route.params.id]
+            event: {},
+            //event: this.events[this.$route.params.id]
           }
         },
         computed: {
@@ -48,7 +51,28 @@
           },
           markers() {return [{
             position: {lat: Number(this.event.mapLatitude), lng: Number(this.event.mapLongitude)}
-          }]}
+          }]},
+          //event() {
+            /*for (let i = 0; i< this.events.length; i++){
+            if (this.events[i]._id = this.$route.params.id) {console.log(this.events, 'found', this.events[i]._id, i); return this.events[i];}
+            }*/
+            /*
+          }
+        }/*,
+        created(){
+          for (let i = 0; i< this.events.length; i++){
+            if (this.events[i]._id = this.$route.params.id) this.event = this.events[i];
+          }
+        }*/},
+        mounted(){
+          axios.get(`https://codemeets.herokuapp.com/events/`+ this.$route.params.id)
+              .then(response => {
+                console.log(response);
+                this.event = response.data.event;
+              })
+              .catch(function (error) {
+                console.log(error);
+              });
         }
     }
 </script>
@@ -81,6 +105,7 @@
       display: inline-block;
       width: 200px;
       font-weight: 600;
+      margin-bottom: 10px;
     }
     .right-block {
       max-width: 300px;

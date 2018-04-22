@@ -14,7 +14,7 @@ export default {
   div {
     background-color: #001766;
     padding: 40px;
-    margin: 0;
+    margin: 30px 0 0;
   }
   p {
     text-align: right;

@@ -1,16 +1,16 @@
 <template>
     <div class="container">
         <ul class="ev-ul">
-            <li v-for="(event, index) in events" :key="event.eventName">
-              <router-link :to="'/info/'+index" tag="a" class="event-link">
+            <li v-for="event in events" v-if="filter(event)" :key="event.id">
+              <router-link :to="'/info/'+event._id" tag="a" class="event-link">
                 <div class="event" :style="{backgroundImage: 'url(' + event.imageLink + ')'}">
                   <div class="event-inner">
                     <div class="ev-name">{{ event.eventName }}</div>
                     <br>
                     <div class="event-buttons">
-                      <router-link :to="'/info/'+index" tag="button" class="event-info">Info</router-link>
-                      <router-link :to="'/edit/'+index" tag="button" class="event-edit"
-                                    v-if="login.id==events[index].eventOwner">Edit event</router-link>
+                      <router-link :to="'/info/'+event._id" tag="button" class="event-info">Info</router-link>
+                      <router-link :to="'/edit/'+event._id" tag="button" class="event-edit"
+                                    v-if="login.id==event.eventOwner">Edit event</router-link>
                     </div>
                     <br>
                   </div>
@@ -18,12 +18,31 @@
               </router-link>
             </li>
         </ul>
-        <router-link to="/new" tag="button" class="add-btn">Add New event</router-link>
+        <router-link to="/new" tag="button" class="add-btn" v-if="this.login">Add New event</router-link>
     </div>
 </template>
 <script>
     export default {
-        props: ['events','login']
+        props: ['events','login','search'],
+        data() {
+          return {
+          }
+        },
+        methods: {
+          filter(ev){
+            for (let i in ev) {
+              if (i=='eventCreated'||i=='_id'||i=='eventOwner') continue; 
+              if (ev[i].toString().toLowerCase().indexOf(this.search.toLowerCase())>-1) return true;
+            }
+            return false;
+          }
+        },
+        mounted(){
+          this.$emit('showSearch', true)
+        },
+        beforeDestroy(){
+          this.$emit('showSearch', false)
+        }
     }
 </script>
 
@@ -44,8 +63,12 @@
     .event-link {
       text-decoration: none;
     }
+    .ev-ul li:last-child {
+      margin-bottom: 10px;
+    }
     .add-btn {
-      margin: 10px 60px 30px;
+      margin: 0;
+      margin-left: 60px
     }
 
     .event-inner {

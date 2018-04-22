@@ -1,16 +1,18 @@
 <template>
   <div class="container">
     <div class="login">
-      <input type="text" placeholder = "Email" v-model = "loginEmail">
+      <input type="email" placeholder = "Email" v-model = "loginEmail">
       <br>
       <input type="password" placeholder = "Password" v-model = "loginPassword">
       <br>
-      <button @click="login">Login</button>
+      <span class="fill">Please fill in email and password fields to continue.</span>
+                  <br><br>
+      <button @click="login" :disabled="disableCheck">Login</button>
       <router-link to="/" tag = "button" class="cancel-button">Back</router-link>
       <br><br>
-      <p>
+      <!--<p>
         <router-link to="/reset-password" tag = "a">Forgot your username or password?</router-link>
-      </p>
+      </p>-->
       <p>
         Don't have an account?
         <router-link to="/register" tag = "a">Sign up</router-link>
@@ -29,6 +31,12 @@ import axios from 'axios'
         loginPassword: ''
       }
     },
+    computed: {
+      disableCheck() {
+        return  (!this.loginEmail || (/^\s+$/).test(this.loginEmail)) ||
+                (!this.loginPassword || (/^\s+$/).test(this.loginPassword))
+      }
+    },
     methods: {
       login() {
           axios.post(`https://codemeets.herokuapp.com/login`, 
@@ -37,9 +45,17 @@ import axios from 'axios'
             password: this.loginPassword
           })
           .then(response => {
+                      /*  console.log(response);
+            ///console.log(response.data);
+            console.log(response.data.token);
+            sessionStorage.token = response.data.token;
+            this.$emit('register', {id: response.data.userId, email: this.signupEmail});
+*/
             console.log(response);
-            console.log(response.data, this.loginEmail)
-            this.$emit('login', {id: response.data, email: this.loginEmail});
+            ///console.log(response.data);
+            //console.log(response.data.id.token);
+            sessionStorage.token = response.data.token;
+            this.$emit('login', {id: response.data.userId, email: this.loginEmail});
           })
           .then(()=>{
             this.$router.push('/')
