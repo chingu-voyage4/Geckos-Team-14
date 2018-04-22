@@ -54,7 +54,6 @@
                   <button @click="deleteAccountRequest=!deleteAccountRequest" class="cancel-button">Back</button>
                 </p>
       </transition>
-      
     </div>
   </div>
 </template>
@@ -92,7 +91,6 @@ export default {
   },
   methods: {
     changeEmail(){
-      console.log(this.newEmail, this.password);
         axios.put(`https://codemeets.herokuapp.com/users/`+this.login.id, 
         {
           newEmail: this.newEmail,
@@ -102,19 +100,12 @@ export default {
           .then(response => {
             this.$emit('emailChanged', this.newEmail);
             this.emailChange = true;
-            //setTimeout(this.emailChange = false, 2000)
-            console.log(response)
           })
-          /*.then(()=>{
-            this.$emit('render');
-            this.$router.push('/')
-          })*/
           .catch(function (error) {
             console.log(error);
           });
     },
     changePassword(){
-      console.log(this.login);
       if (this.newPassword === this.confirmPassword){
       axios.put(`https://codemeets.herokuapp.com/users/`+this.login.id, {
           password: this.curPassword,
@@ -123,24 +114,17 @@ export default {
         }, {headers: {'Authorization': sessionStorage.token}})
         .then(response => {
           this.passwordChange = true;
-          console.log(response)
         })
-        /*.then(()=>{
-          this.$emit('render');
-          this.$router.push('/')
-        })*/
         .catch(function (error) {
           console.log(error);
         });
       }
     },
     deleteAccount(){
-      console.log(this.delPassword);
       axios.post(`https://codemeets.herokuapp.com/users/`+this.login.id+`/delete`, 
       {password: this.delPassword}, 
       {headers: {'Authorization': sessionStorage.token}})
         .then(response => {
-          console.log(response)
           sessionStorage.clear();
           this.$emit('exit');
           this.$router.push('/');
@@ -148,15 +132,6 @@ export default {
         .catch(function (error) {
           console.log(error);
         });
-      /*axios.delete(`https://codemeets.herokuapp.com/users/`+this.login.id, 
-      {params: {password: this.delPassword}}, 
-      {headers: {'Authorization': sessionStorage.token}})
-        .then(response => {
-          console.log(response)
-        })
-        .catch(function (error) {
-          console.log(error);
-        });*/
     }
   }
 }

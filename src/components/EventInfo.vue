@@ -9,9 +9,6 @@
         <div class="row"><span class="left-block">Address:</span><span class="right-block">{{ event.address }}</span><br></div>
         <div class="row"><span class="left-block">Venue name:</span><span class="right-block">{{ event.venueName }}</span><br></div>
         <div class="row"><span class="left-block">Time:</span><span class="right-block">{{ event.beginTime }} <span v-if="event.endTime!==''">- </span>{{ event.endTime }}</span><br></div>
-        <!--<div class="row"><span class="left-block">Company name:</span><span class="right-block">{{ event.company }}</span><br></div>
-        <div class="row"><span class="left-block">Price:</span><span class="right-block">{{ event.price }}</span><br></div>
-        <div class="row"><span class="left-block">Contact phone:</span><span class="right-block">{{ event.contactPhone }}</span><br></div>-->
         <div class="row"><span class="left-block">Contact email:</span><span class="right-block">{{ event.contactEmail }}</span><br></div>
         <div class="row"><span class="left-block">Map coordinates:</span><span class="right-block">lat: {{event.mapLatitude}}, lon: {{event.mapLongitude}}</span><br></div>
       </div>
@@ -41,8 +38,7 @@ import axios from 'axios'
         data(){
           return {  
             place: null,
-            event: {},
-            //event: this.events[this.$route.params.id]
+            event: {}
           }
         },
         computed: {
@@ -52,22 +48,10 @@ import axios from 'axios'
           markers() {return [{
             position: {lat: Number(this.event.mapLatitude), lng: Number(this.event.mapLongitude)}
           }]},
-          //event() {
-            /*for (let i = 0; i< this.events.length; i++){
-            if (this.events[i]._id = this.$route.params.id) {console.log(this.events, 'found', this.events[i]._id, i); return this.events[i];}
-            }*/
-            /*
-          }
-        }/*,
-        created(){
-          for (let i = 0; i< this.events.length; i++){
-            if (this.events[i]._id = this.$route.params.id) this.event = this.events[i];
-          }
-        }*/},
+        },
         mounted(){
           axios.get(`https://codemeets.herokuapp.com/events/`+ this.$route.params.id)
               .then(response => {
-                console.log(response);
                 this.event = response.data.event;
               })
               .catch(function (error) {

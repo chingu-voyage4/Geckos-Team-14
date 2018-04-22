@@ -64,14 +64,11 @@
         <br><br>
         <p class="fill">Please fill in all requred<span class="asterisk">*</span> the fields to continue.</p>
         <span v-if="this.$route.fullPath=='/new'">
-         <!--<router-link to="/" tag = "button" @click.native="newEventAdded">Add new event</router-link>-->
          <button @click="newEventAdded" :disabled="disableCheck">Add new event</button>
          </span>
         <span v-else>
           <button @click="eventEdited" :disabled="disableCheck">Edit event</button>
           <button @click="eventDeleted">Delete event</button>
-            <!--<router-link to="/" tag = "button" @click.native="eventEdited">Edit event</router-link>
-            <router-link to="/" tag = "button" @click.native="eventDeleted">Delete event</router-link>-->
         </span>
         <router-link to="/" tag = "button" class="cancel-button">Cancel</router-link>
       </div>
@@ -91,7 +88,6 @@ import axios from 'axios'
         },
         computed: {
           disableCheck(){
-            //!query || (/^\s+$/).test(query))
             return  ( ( !this.eventData.eventName || (/^\s+$/).test(this.eventData.eventName) )||
                     ( !this.eventData.country || (/^\s+$/).test(this.eventData.country) ) ||
                     ( !this.eventData.city || (/^\s+$/).test(this.eventData.city) ) ||
@@ -100,8 +96,6 @@ import axios from 'axios'
                     ( !this.eventData.beginTime || (/^\s+$/).test(this.eventData.beginTime) ) ||
                     ( !this.eventData.contactName || (/^\s+$/).test(this.eventData.contactName) ) ||
                     ( !this.eventData.contactEmail || (/^\s+$/).test(this.eventData.contactEmail) ) )
-            //return !this.eventData.eventName||(!this.eventData.country);
-            //return this.dis(eventData.eventName)
           }
         },
         mounted(){
@@ -117,41 +111,28 @@ import axios from 'axios'
                     venueName: '',
                     beginTime: '',
                     endTime: '',
-                    /*company: '',
-                    price: '',
-                    contactPhone: '',*/
                     contactName: '',
                     contactEmail: '',
                     mapLongitude: 0,
-                    mapLatitude: 0,
-                    //eventOwner: this.login.id,//"unknown",//this.login.id,
-                    //user: this.login.id,
-                    //userId: this.login.id//"unknown"
+                    mapLatitude: 0
                 }
             }
             else {
               axios.get(`https://codemeets.herokuapp.com/events/`+ this.$route.params.id)
               .then(response => {
-                console.log(response);
                 this.eventData = response.data.event;
               })
               .catch(function (error) {
                 console.log(error);
               });
-                //this.eventData = this.events[this.id]
             }
         },
         methods: {
             newEventAdded() {
-                //console.log(this.login.id, this.eventData);
-                //this.eventData.user = this.login.id;
-                console.log(this.eventData);
                 this.eventData.imageLink = this.eventData.imageLink||'/src/assets/12.jpg';
                 axios.post(`https://codemeets.herokuapp.com/events`, this.eventData, {headers: {'Authorization': sessionStorage.token}})
                 .then(response => {
-                  console.log(response);
                   this.eventData = response;
-                  //this.events.push(this.eventData);
                 })
                 .then(()=>{
                   this.$emit('render');
@@ -160,22 +141,9 @@ import axios from 'axios'
                 .catch(function (error) {
                   console.log(error);
                 });
-                /*axios.post('https://codemeets.herokuapp.com/events', this.eventData)*/
-                //PUT this.events to database
             },
             eventEdited() {
-                //this.events[this.id] = this.eventData;
-                //this.eventData.userId = this.login.id;
-                //console.log(this.events[this.id]);
-                console.log('here',this.eventData._id)
-                axios.get(`https://codemeets.herokuapp.com/events`)
-                .then(response => {
-                  console.log(response)
-                })
                 axios.put(`https://codemeets.herokuapp.com/events/`+this.eventData._id, this.eventData, {headers: {'Authorization': sessionStorage.token}})
-                .then(response => {
-                  console.log(response)
-                })
                 .then(()=>{
                   this.$emit('render');
                   this.$router.push('/')
@@ -185,19 +153,7 @@ import axios from 'axios'
                 });
             },
             eventDeleted() {
-                //this.events.splice(this.id, 1);
-                console.log(this.login.id);
-                /*axios.delete(`https://codemeets.herokuapp.com/events/vanishall`)
-                .then(response => {
-                  console.log(response)
-                })
-                .catch(function (error) {
-                  console.log(error);
-                })*/
                 axios.delete(`https://codemeets.herokuapp.com/events/`+this.eventData._id, {headers: {'Authorization': sessionStorage.token}})
-                .then(response => {
-                  console.log(response)
-                })
                 .then(()=>{
                   this.$emit('render');
                   this.$router.push('/')

@@ -40,7 +40,9 @@
 | --- | --- |
 | see scheduled meetup events and filter them by country and city - without logging in | MVP |
 | create a user account and login | MVP |
-| create, edit and delete events - when logged in | MVP |
+| edit email and password - when logged in | MVP |
+| delete account - when logged in | MVP |
+| create, edit and delete my events - when logged in | MVP |
 | view the location of the event on Google Maps - without logging in | MVP |
 | contact the user that created the event, by contact form - without logging in | V2 |
 | visit the user profile of the user that creates an event - without logging in | V2 |

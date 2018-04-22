@@ -37,7 +37,6 @@ export default {
   },
   methods: {
     authorisation(data) {
-      console.log(data);
       this.login = data
     },
     logOut(){
@@ -47,14 +46,12 @@ export default {
       axios.get(`https://codemeets.herokuapp.com/events`)
       .then(response => {
         this.events = response.data;
-
       })
       .catch(function (error) {
         console.log(error);
       });
     },
     searchChange(data){
-      console.log(data);
       this.search = data;
     },
     searchVisibility(data){
@@ -66,64 +63,6 @@ export default {
   },
   mounted(){
     this.renderEvents();
-    //fetch events data from database, and then
-    //this.events = data
-    //delete lines 36-90
-    /*this.events = [{
-            name: 'ev1',
-            img: '/src/assets/12.jpg',
-            imgAlt: 'logo1',
-            description: 'desc1',
-            date: '20.04.2018',
-            city: 'San Francisco, Ca 94102 United States',
-            address: '150 Anza Blvd',
-            venueName: 'Embassy Suites - Burlingame',
-            beginTime: '11:30 AM',
-            endTime: '2:00 PM',
-            company: 'Google',
-            price: '1$',
-            contactPhone: '123456789',
-            contactEmail: 'email@email.com',
-            mapLatitude: 48.858370,
-            mapLongitude: 2.294486
-          },
-          {
-            name: 'ev2',
-            img: '/src/assets/logo.png',
-            imgAlt: 'logo2',
-            description: 'desc2',
-            date: '20.04.2018',
-            city: 'San Francisco, Ca 94102 United States',
-            address: '150 Anza Blvd',
-            venueName: 'Embassy Suites - Burlingame',
-            beginTime: '11:30 AM',
-            endTime: '2:00 PM',
-            company: 'Google',
-            price: '1$',
-            contactPhone: '123456789',
-            contactEmail: 'email@email.com',
-            mapLatitude: 51.501275,
-            mapLongitude: -0.125064
-          },
-          {
-            name: 'ev3',
-            img: '/src/assets/logo.png',
-            imgAlt: 'logo3',
-            description: 'desc3',
-            date: '20.04.2018',
-            city: 'San Francisco, Ca 94102 United States',
-            address: '150 Anza Blvd',
-            venueName: 'Embassy Suites - Burlingame',
-            beginTime: '11:30 AM',
-            endTime: '2:00 PM',
-            company: 'Google',
-            price: '1$',
-            contactPhone: '123456789',
-            contactEmail: 'email@email.com',
-            mapLatitude: 51.501275,
-            mapLongitude: -0.125064
-          }
-        ]*/
   },
   components: {
     appHeader: Header,

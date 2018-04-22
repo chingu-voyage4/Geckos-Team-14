@@ -10,9 +10,6 @@
       <button @click="login" :disabled="disableCheck">Login</button>
       <router-link to="/" tag = "button" class="cancel-button">Back</router-link>
       <br><br>
-      <!--<p>
-        <router-link to="/reset-password" tag = "a">Forgot your username or password?</router-link>
-      </p>-->
       <p>
         Don't have an account?
         <router-link to="/register" tag = "a">Sign up</router-link>
@@ -45,15 +42,6 @@ import axios from 'axios'
             password: this.loginPassword
           })
           .then(response => {
-                      /*  console.log(response);
-            ///console.log(response.data);
-            console.log(response.data.token);
-            sessionStorage.token = response.data.token;
-            this.$emit('register', {id: response.data.userId, email: this.signupEmail});
-*/
-            console.log(response);
-            ///console.log(response.data);
-            //console.log(response.data.id.token);
             sessionStorage.token = response.data.token;
             this.$emit('login', {id: response.data.userId, email: this.loginEmail});
           })

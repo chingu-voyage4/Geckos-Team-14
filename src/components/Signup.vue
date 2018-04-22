@@ -9,7 +9,6 @@
       <br>
       <span class="fill">Please fill in all the fields to continue.</span>
                   <br><br>
-      <!--<router-link to="/" tag = "button" @click.native="signup">Signup</router-link>-->
       <button @click="signup" :disabled="disableCheck">Signup</button>
       <router-link to="/" tag = "button" class="cancel-button">Back</router-link>
       <p><br>
@@ -52,7 +51,6 @@ import axios from 'axios'
           })
           .then(response => {
             console.log(response);
-            ///console.log(response.data);
             console.log(response.data.token);
             sessionStorage.token = response.data.token;
             this.$emit('register', {id: response.data.userId, email: this.signupEmail});

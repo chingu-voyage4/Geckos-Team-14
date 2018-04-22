@@ -10,7 +10,6 @@
         <span v-if="login!==''">
           <span>{{login.email}}</span>
           <router-link to="/profile" tag = "button" class="profile-button">Profile</router-link>
-          <!--<router-link to="/" tag = "button" class="exit-button" @click="exit">Log out</router-link>-->
           <button class="exit-button" @click="exit">Log out</button>
         </span>
         <span v-else>
@@ -33,23 +32,12 @@ import axios from 'axios'
       },
       methods: {
         searchChanged(){
-          console.log('ss', this.search);
           this.$emit('searchChange', this.search)
         },
         exit() {
           sessionStorage.clear();
           this.$emit('exit');
           this.$router.push('/');
-          /*axios.get(`https://codemeets.herokuapp.com/logout`)
-          .then(response => {
-            this.$emit('exit');
-          })
-          .then(()=>{
-            this.$router.push('/')
-          })
-          .catch(function (error) {
-            console.log(error);
-          });*/
         }
       }
     }
