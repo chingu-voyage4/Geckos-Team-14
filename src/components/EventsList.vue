@@ -24,14 +24,10 @@
 <script>
     export default {
         props: ['events','login','search'],
-        data() {
-          return {
-          }
-        },
         methods: {
           filter(ev){
             for (let i in ev) {
-              if (i=='eventCreated'||i=='_id'||i=='eventOwner') continue; 
+              if (i=='eventCreated'||i=='_id'||i=='eventOwner'||i=='imageLink') continue; 
               if (ev[i].toString().toLowerCase().indexOf(this.search.toLowerCase())>-1) return true;
             }
             return false;
@@ -113,12 +109,10 @@
       display: flex;
       justify-content: center;
     }
-
     .ev-img {
         height: 300px;
         width: auto;
     }
-
     .ev-ul {
         position: relative;
         list-style-type: none;

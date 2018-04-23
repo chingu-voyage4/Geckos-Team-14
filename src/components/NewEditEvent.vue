@@ -9,9 +9,6 @@
         <label for="ev-img">Image link:</label>
         <input type="text" v-model="eventData.imageLink" id="ev-img">
         <br><br>
-        <!--<label for="ev-imgAlt">Image alt text:</label>
-        <input type="text" v-model="eventData.imgAlt" id="ev-imgAlt">
-        <br><br>-->
         <label for="ev-description">Event Description:</label>
         <input type="text" v-model="eventData.description" id="ev-description">
         <br><br>
@@ -36,15 +33,6 @@
         <label for="ev-endTime">End Time:</label>
         <input type="text" v-model="eventData.endTime" id="ev-endTime">
         <br><br>
-        <!--<label for="ev-company">Company:</label>
-        <input type="text" v-model="eventData.company" id="ev-company">
-        <br><br>
-        <label for="ev-price">Price:</label>
-        <input type="text" v-model="eventData.price" id="ev-price">
-        <br><br>
-        <label for="ev-contactPhone">Contact Phone:</label>
-        <input type="text" v-model="eventData.contactPhone" id="ev-contactPhone">
-        <br><br>-->
         <label for="ev-contactName">Contact Name<span class="asterisk">*</span>:</label>
         <input type="text" v-model="eventData.contactName" id="ev-contactName">
         <br><br>
@@ -62,7 +50,7 @@
         <label for="ev-mapLongitude">Map Longitude:</label>
         <input type="text" v-model="eventData.mapLongitude" id="ev-mapLongitude">
         <br><br>
-        <p class="fill">Please fill in all requred<span class="asterisk">*</span> the fields to continue.</p>
+        <p class="fill">Please fill in all the requred<span class="asterisk">*</span> fields to continue.</p>
         <span v-if="this.$route.fullPath=='/new'">
          <button @click="newEventAdded" :disabled="disableCheck">Add new event</button>
          </span>

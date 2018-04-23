@@ -2,8 +2,7 @@
   <div class="container" v-if = "login">
     <div class="profile">
       <transition name = "fade"
-                mode = "out-in" 
-                >
+                  mode = "out-in">
                 <div v-if = "!changeEmailRequest&&!changePasswordRequest&&!deleteAccountRequest">
                   <button @click="changeEmailRequest=!changeEmailRequest"
                           class="change">Change email</button>

@@ -50,8 +50,6 @@ import axios from 'axios'
             confirmPassword: this.signupConfirmPassword
           })
           .then(response => {
-            console.log(response);
-            console.log(response.data.token);
             sessionStorage.token = response.data.token;
             this.$emit('register', {id: response.data.userId, email: this.signupEmail});
           })

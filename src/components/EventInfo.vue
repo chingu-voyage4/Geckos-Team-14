@@ -5,10 +5,12 @@
       <div class="info">
         <div class="row"><span class="left-block">Description:</span><span class="right-block">{{ event.description }}</span><br></div>
         <div class="row"><span class="left-block">Date:</span><span class="right-block">{{ event.date }}</span><br></div>
+        <div class="row"><span class="left-block">Country:</span><span class="right-block">{{ event.country }}</span><br></div>
         <div class="row"><span class="left-block">City:</span><span class="right-block">{{ event.city }}</span><br></div>
         <div class="row"><span class="left-block">Address:</span><span class="right-block">{{ event.address }}</span><br></div>
         <div class="row"><span class="left-block">Venue name:</span><span class="right-block">{{ event.venueName }}</span><br></div>
         <div class="row"><span class="left-block">Time:</span><span class="right-block">{{ event.beginTime }} <span v-if="event.endTime!==''">- </span>{{ event.endTime }}</span><br></div>
+        <div class="row"><span class="left-block">Contact name:</span><span class="right-block">{{ event.contactName }}</span><br></div>
         <div class="row"><span class="left-block">Contact email:</span><span class="right-block">{{ event.contactEmail }}</span><br></div>
         <div class="row"><span class="left-block">Map coordinates:</span><span class="right-block">lat: {{event.mapLatitude}}, lon: {{event.mapLongitude}}</span><br></div>
       </div>
@@ -37,7 +39,6 @@ import axios from 'axios'
         props: ['events'],
         data(){
           return {  
-            place: null,
             event: {}
           }
         },
