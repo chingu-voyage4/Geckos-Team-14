@@ -1,0 +1,20 @@
+{
+  "name": "codeMeets",
+  "version": "1.0.0",
+  "description": "A simple REST API and authentication system for a project",
+  "main": "server.js",
+  "scripts": {
+    "start": "node ./server"
+  },
+  "keywords": [],
+  "author": "Louis Foged",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.16.3",
+    "jsonwebtoken": "^8.2.1",
+    "mongoose": "^5.0.14"
+  }
+}
